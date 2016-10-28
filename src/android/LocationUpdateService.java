@@ -415,7 +415,7 @@ public class LocationUpdateService extends Service implements LocationListener {
 
         if (this.isNetworkConnected()) {
             Log.d(TAG, "Scheduling location network post");
-            schedulePostLocations();
+            //schedulePostLocations();
         } else {
             Log.d(TAG, "Network unavailable, waiting for now");
         }
@@ -651,50 +651,52 @@ public class LocationUpdateService extends Service implements LocationListener {
     }
 
     private boolean postLocation(com.tenforwardconsulting.cordova.bgloc.data.Location l) {
-        if (l == null) {
-            Log.w(TAG, "postLocation: null location");
-            return false;
-        }
-        try {
-            lastUpdateTime = SystemClock.elapsedRealtime();
-            Log.i(TAG, "Posting  native location update: " + l);
-            // DefaultHttpClient httpClient = new DefaultHttpClient();
-            // HttpPost request = new HttpPost(url);
+        // if (l == null) {
+        //     Log.w(TAG, "postLocation: null location");
+        //     return false;
+        // }
+        // try {
+        //     lastUpdateTime = SystemClock.elapsedRealtime();
+        //     Log.i(TAG, "Posting  native location update: " + l);
+        //     // DefaultHttpClient httpClient = new DefaultHttpClient();
+        //     // HttpPost request = new HttpPost(url);
 
-            JSONObject location = new JSONObject();
-            location.put("latitude", l.getLatitude());
-            location.put("longitude", l.getLongitude());
-            location.put("accuracy", l.getAccuracy());
-            location.put("speed", l.getSpeed());
-            location.put("recorded_at", l.getRecordedAt());
-            params.put("location", location);
+        //     JSONObject location = new JSONObject();
+        //     location.put("latitude", l.getLatitude());
+        //     location.put("longitude", l.getLongitude());
+        //     location.put("accuracy", l.getAccuracy());
+        //     location.put("speed", l.getSpeed());
+        //     location.put("recorded_at", l.getRecordedAt());
+        //     params.put("location", location);
 
-            StringEntity se = new StringEntity(params.toString());
-            request.setEntity(se);
-            request.setHeader("Accept", "application/json");
-            request.setHeader("Content-type", "application/json");
+        //     // StringEntity se = new StringEntity(params.toString());
+        //     // request.setEntity(se);
+        //     // request.setHeader("Accept", "application/json");
+        //     // request.setHeader("Content-type", "application/json");
 
-            Iterator<String> headkeys = headers.keys();
-            while( headkeys.hasNext() ){
-		String headkey = headkeys.next();
-		if(headkey != null) {
-            		Log.d(TAG, "Adding Header: " + headkey + " : " + (String)headers.getString(headkey));
-            		request.setHeader(headkey, (String)headers.getString(headkey));
-		}
-            }
-            Log.d(TAG, "Posting to " + request.getURI().toString());
-            // HttpResponse response = httpClient.execute(request);
-            Log.i(TAG, "Response received: " + response.getStatusLine());
-            if (response.getStatusLine().getStatusCode() == 200) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Throwable e) {
-            Log.w(TAG, "Exception posting location: " + e);
-            e.printStackTrace();
-            return false;
-        }
+        //     Iterator<String> headkeys = headers.keys();
+        //     while( headkeys.hasNext() ){
+		// String headkey = headkeys.next();
+		// if(headkey != null) {
+        //     		// Log.d(TAG, "Adding Header: " + headkey + " : " + (String)headers.getString(headkey));
+        //     		// request.setHeader(headkey, (String)headers.getString(headkey));
+		// }
+        //     }
+        //     // Log.d(TAG, "Posting to " + request.getURI().toString());
+        //     // // HttpResponse response = httpClient.execute(request);
+        //     // Log.i(TAG, "Response received: " + response.getStatusLine());
+        //     // if (response.getStatusLine().getStatusCode() == 200) {
+        //     //     return true;
+        //     // } else {
+        //     //     return false;
+        //     // }
+        // } catch (Throwable e) {
+        //     Log.w(TAG, "Exception posting location: " + e);
+        //     e.printStackTrace();
+        //     return false;
+        // }
+
+        return true;
     }
     private void persistLocation(Location location) {
         LocationDAO dao = DAOFactory.createLocationDAO(this.getApplicationContext());
