@@ -3,10 +3,10 @@ package com.tenforwardconsulting.cordova.bgloc;
 import java.util.List;
 import java.util.Iterator;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+// import org.apache.http.HttpResponse;
+// import org.apache.http.client.methods.HttpPost;
+// import org.apache.http.entity.StringEntity;
+// import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -658,8 +658,8 @@ public class LocationUpdateService extends Service implements LocationListener {
         try {
             lastUpdateTime = SystemClock.elapsedRealtime();
             Log.i(TAG, "Posting  native location update: " + l);
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost request = new HttpPost(url);
+            // DefaultHttpClient httpClient = new DefaultHttpClient();
+            // HttpPost request = new HttpPost(url);
 
             JSONObject location = new JSONObject();
             location.put("latitude", l.getLatitude());
@@ -683,7 +683,7 @@ public class LocationUpdateService extends Service implements LocationListener {
 		}
             }
             Log.d(TAG, "Posting to " + request.getURI().toString());
-            HttpResponse response = httpClient.execute(request);
+            // HttpResponse response = httpClient.execute(request);
             Log.i(TAG, "Response received: " + response.getStatusLine());
             if (response.getStatusLine().getStatusCode() == 200) {
                 return true;
